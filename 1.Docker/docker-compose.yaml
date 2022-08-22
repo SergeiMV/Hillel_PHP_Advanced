@@ -1,0 +1,48 @@
+version: "2"
+
+services:
+  php-test:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    links:
+      - db
+      - second
+
+  db:
+    image: mysql:5.7.37 
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - volume1:/var/lib/mysql
+
+  second:
+   image: mysql
+   restart: always
+   command: --default-authentication-plugin=mysql_native_password
+   ports:
+     - "33066:3306"
+   environment:
+     MYSQL_ROOT_PASSWORD: test
+   volumes:
+     - volume2:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.1.3
+    restart: always
+    ports:
+      - 8080:80
+    environment: 
+      - PMA_HOST:second
+
+
+volumes:
+  volume1:
+  volume2:
+
+

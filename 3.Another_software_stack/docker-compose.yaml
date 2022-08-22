@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+  php-test:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    links:
+      - db
+
+  db:
+    image: postgres:12.1
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=root
+
+  adminer:
+    image: adminer:4.7.5
+    restart: always
+    ports: 
+      - 8080:8080
+
+
+
+

@@ -1,0 +1,7 @@
+body {
+        background: url('/public/images/background2.jpg') no-repeat center center fixed;
+        background-size: cover;
+}
+td {
+    text-align: center;
+}

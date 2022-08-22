@@ -1,0 +1,34 @@
+version: "2"
+
+services:
+  php-test:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    links:
+      - db
+
+  db:
+    image: mysql:5.7.28
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - volume1:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.9.1
+    restart: always
+    ports:
+      - 8080:80
+    environment: 
+      - PMA_HOST:db
+
+volumes:
+  volume1:
+
+

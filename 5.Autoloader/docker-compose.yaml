@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  php-test:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/src
+      - ./main:/var/www/html
+      - ./vendor:/vendor
